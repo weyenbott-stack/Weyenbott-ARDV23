@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unbanned WhatsApp - Tema Seram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 0, 128, 0.3);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+
+        .header {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: pulse-glow 3s infinite alternate;
+            filter: brightness(0.8) contrast(1.2);
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+                filter: brightness(0.8) contrast(1.2);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(255, 0, 128, 0.8), 0 0 60px rgba(255, 0, 128, 0.4);
+                filter: brightness(1) contrast(1.3);
+            }
+        }
+
+        .title {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff0033;
+            text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033, 0 0 30px #ff0033;
+            animation: title-glow 2s infinite alternate;
+        }
+
+        @keyframes title-glow {
+            0% {
+                text-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
+            }
+            100% {
+                text-shadow: 0 0 15px #ff0033, 0 0 30px #ff0033, 0 0 40px #ff0033;
+            }
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(20, 0, 10, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+            border: 1px solid rgba(255, 0, 128, 0.5);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff6699;
+            font-weight: bold;
+        }
+
+        .input-field {
+            width: 90px;
+            height: 40px;
+            padding: 0 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #ff0033;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.7);
+        }
+
+        .select-field {
+            width: 130px;
+            height: 50px;
+            padding: 0 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid #ff0033;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .select-field:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.7);
+        }
+
+        .unban-button {
+            display: block;
+            width: 100%;
+            height: 60px;
+            margin: 30px 0;
+            background: linear-gradient(to bottom, #ff0033, #990033);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+        }
+
+        .unban-button:hover {
+            background: linear-gradient(to bottom, #ff3366, #cc0033);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .telegram-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .telegram-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #0088cc;
+            transition: all 0.3s;
+        }
+
+        .telegram-link:hover {
+            color: #00aaff;
+            transform: scale(1.1);
+        }
+
+        .telegram-icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .history-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .menu-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #ff0033;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle:hover .menu-bar {
+            background-color: #ff6699;
+            box-shadow: 0 0 5px rgba(255, 0, 128, 0.7);
+        }
+
+        .history-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 300px;
+            background-color: rgba(20, 0, 10, 0.9);
+            border: 1px solid #ff0033;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+        }
+
+        .history-content h3 {
+            color: #ff6699;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .history-list {
+            list-style-type: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 0, 128, 0.3);
+            color: #ffccdd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-blocked {
+            color: #ff0033;
+        }
+
+        .status-unbanned {
+            color: #00ff66;
+        }
+
+        .check-status-btn {
+            background: rgba(255, 0, 128, 0.3);
+            border: 1px solid #ff0033;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .check-status-btn:hover {
+            background: rgba(255, 0, 128, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #ff6699;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 18px;
+            }
+            
+            .form-container {
+                margin: 0 15px;
+                padding: 15px;
+            }
+            
+            .header {
+                height: 200px;
+            }
+            
+            .history-content {
+                width: 250px;
+            }
+            
+            .input-field {
+                width: 100%;
+            }
+            
+            .select-field {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <div class="history-menu">
+        <div class="menu-toggle" id="menuToggle">
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+        </div>
+        <div class="history-content" id="historyContent">
+            <h3>Histori Nomor</h3>
+            <ul class="history-list">
+                <li class="history-item status-blocked">
+                    <span>+628123456789 - Terblokir</span>
+                    <button class="check-status-btn">Cek Status</button>
+                </li>
+                <li class="history-item status-unbanned">
+                    <span>+628987654321 - Berhasil Unban</span>
+                    <button class="check-status-btn">Cek Status</button>
+                </li>
+                <li class="history-item status-blocked">
+                    <span>+628555555555 - Terblokir</span>
+                    <button class="check-status-btn">Cek Status</button>
+                </li>
+                <li class="history-item status-unbanned">
+                    <span>+628777777777 - Berhasil Unban</span>
+                    <button class="check-status-btn">Cek Status</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="header">
+        <img src="https://files.catbox.moe/waet06.jpeg" alt="Gambar Seram" class="header-image">
+    </div>
+
+    <h1 class="title">☠︎⚡❄️𝐑𝐀𝐌𝐃𝐇𝐀𝐍 𝐎𝐅𝐅𝚰𝐂𝚰𝐀𝐋 👑❄️⚡☠︎</h1>
+
+    <div class="form-container">
+        <div class="input-group">
+            <label for="phoneNumber">Nomor WhatsApp:</label>
+            <input type="text" id="phoneNumber" class="input-field" placeholder="+6283196264107">
+        </div>
+
+        <div class="input-group">
+            <label for="method">Pilih Metode:</label>
+            <select id="method" class="select-field">
+                <option value="method1">[MET 1 SPAM FRESH]</option>
+                <option value="method2">[MET 2 PERMA]</option>
+                <option value="method3">[MET 3 PERMA HARD]</option>
+            </select>
+        </div>
+
+        <button class="unban-button" id="unbanButton">❄️★彡𝐔𝐍𝐁𝐀𝐍 𝐍𝐔𝐌𝐁𝐄𝐑彡★❄️</button>
+
+        <div class="telegram-links">
+            <a href="https://t.me/GarielGeri" class="telegram-link" target="_blank">
+                <i class="fab fa-telegram telegram-icon"></i>
+                <span>Telegram Saya</span>
+            </a>
+            <a href="https://t.me/+AgMWnJ5g-pI4Yjk1" class="telegram-link" target="_blank">
+                <i class="fab fa-telegram-plane telegram-icon"></i>
+                <span>Channel Telegram</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 RAMDHAN OFFICIAL - Layanan Unbanned WhatsApp</p>
+    </div>
+
+    <audio id="backgroundAudio" loop>
+        <source src="https://files.catbox.moe/02sqtf.mp4" type="audio/mp4">
+    </audio>
+
+    <script>
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const symbols = ['☠', '⚡', '❄', '👑', '💀', '🔥', '🩸', '👁️'];
+            
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDelay = Math.random() * 15 + 's';
+                element.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                container.appendChild(element);
+            }
+        }
+
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const historyContent = document.getElementById('historyContent');
+            historyContent.style.display = historyContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('unbanButton').addEventListener('click', function() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const method = document.getElementById('method').value;
+            
+            if (!phoneNumber) {
+                alert('Masukkan nomor WhatsApp terlebih dahulu!');
+                return;
+            }
+            
+            let emailTo, subject, body;
+            
+            switch(method) {
+                case 'method1':
+                    emailTo = 'support@support.whatsapp.com';
+                    subject = 'Tolong Tinjau akun WhatsApp saya';
+                    body = `Saya ingin banding.\nNomor: ${phoneNumber}\nAlasan: Disalah gunakan oleh oknum Tidak Bersalah. Mohon bantuanya trimakasih.`;
+                    break;
+                case 'method2':
+                    emailTo = 'support@support.whatsapp.com';
+                    subject = 'Permohonan Banding _ Cabut Pemblokiran Akun';
+                    body = `Hallo selamat siang tim dukungan WhatsApp\nSaya Inging mengajukan banding atas akun WhatsApp saya ([ ${phoneNumber} ]) yang di belokir permanen oleh pihak WhatsApp , di sini saya menegaskan bahwasanya saya benar² tidak melakukan apa2 yg berkaitan melanggar aturan WhatsApp , Kemaren saya sedang menghubungi keluarga keluarga saya sekitar 10 kontak nah saya Inging memberi undangan pernikahan saya ke mereka tiba tiba akun saya terblokir spam , nah setelah di tinjau selama 7 jam ,akun saya di ubah jadi pembelokiran permanen , saya sangat sedih karena saya tidak bisa mengabarkan keluarga saya padahal saya ingin mengabarkan atas pernikahan saya , jadi tolong pihak WhatsApp segera banding dan buka akun WhatsApp saya ,nomor WhatsApp saya ([ ${phoneNumber} ])\nTerimakasih...\nA/n [ MUHAMMAD ]`;
+                    break;
+                case 'method3':
+                    emailTo = 'help_new@support.whatsapp.com,support@support.whatsapp.com';
+                    subject = '新的 WhatsApp 用戶帳號申訴提交';
+                    body = `你好，下午好 WhatsApp，我是 WhatsApp 應用程式的新用戶，在這裡我想提出有關我的 WhatsApp 帳戶（數位格式為 > ${phoneNumber}）的問題。而且我不認為我做過任何違反網站上列出的 WhatsApp 條款的行為 > https://faq.whatsapp.com/1313491802751163?locale=id_ID<+>https://faq.whatsapp.com/1848531392146538?locale=id_ID<+>h ttps://www.whatsapp.com/legal/privacy-policy?lang=id_ID<+>https://www.whatsapp.com/legal/terms-of-service?lang=id_ID而我使用了 Play 商店和網站 > (https://www.whatsapp.com/legal) 上提供的官方 WhatsApp。請恢復我被永久封鎖的 WhatsApp 帳戶，以便用於與家人溝通。謝謝你的幫忙`;
+                    break;
+            }
+            
+            const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink, '_blank');
+            
+            addToHistory(phoneNumber, method);
+        });
+
+        function addToHistory(phoneNumber, method) {
+            const historyList = document.querySelector('.history-list');
+            const newItem = document.createElement('li');
+            newItem.className = 'history-item status-blocked';
+            
+            const statusSpan = document.createElement('span');
+            statusSpan.textContent = `${phoneNumber} - Sedang diproses`;
+            
+            const checkButton = document.createElement('button');
+            checkButton.className = 'check-status-btn';
+            checkButton.textContent = 'Cek Status';
+            checkButton.addEventListener('click', function() {
+                checkWhatsAppStatus(phoneNumber, newItem, statusSpan);
+            });
+            
+            newItem.appendChild(statusSpan);
+            newItem.appendChild(checkButton);
+            historyList.prepend(newItem);
+            
+            setTimeout(() => {
+                newItem.className = 'history-item status-unbanned';
+                statusSpan.textContent = `${phoneNumber} - Berhasil Unban`;
+            }, 5000);
+        }
+
+        function checkWhatsAppStatus(phoneNumber, itemElement, statusSpan) {
+            const isBlocked = Math.random() > 0.5;
+            
+            if (isBlocked) {
+                itemElement.className = 'history-item status-blocked';
+                statusSpan.textContent = `${phoneNumber} - Masih Terblokir`;
+                alert(`Nomor ${phoneNumber} masih terblokir di WhatsApp.`);
+            } else {
+                itemElement.className = 'history-item status-unbanned';
+                statusSpan.textContent = `${phoneNumber} - Sudah Terbuka`;
+                alert(`Nomor ${phoneNumber} sudah terbuka dan dapat digunakan di WhatsApp.`);
+            }
+        }
+
+        document.querySelectorAll('.check-status-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const listItem = this.parentElement;
+                const phoneNumber = listItem.querySelector('span').textContent.split(' - ')[0];
+                const statusSpan = listItem.querySelector('span');
+                checkWhatsAppStatus(phoneNumber, listItem, statusSpan);
+            });
+        });
+
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('backgroundAudio');
+            audio.volume = 0.3;
+            
+            document.body.addEventListener('click', function() {
+                audio.play().catch(e => console.log('Autoplay prevented:', e));
+            }, { once: true });
+        });
+
+        createFloatingElements();
+    </script>
+</body>
+</html>
